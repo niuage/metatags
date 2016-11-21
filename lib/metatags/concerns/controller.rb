@@ -30,27 +30,29 @@
 #
 
 module Metatags
-  module ControllerConcern
-    extend ActiveSupport::Concern
+  module Concerns
+    module Controller
+      extend ActiveSupport::Concern
 
-    included do
-      before_action :build_default_meta_tags
+      included do
+        before_action :build_default_meta_tags
 
-      attr_accessor :meta_tags
-      helper_method :meta_tags
-    end
-
-    module ClassMethods
-      def build_meta_tags(options = {})
-        skip_before_action :build_default_meta_tags, options
-        before_action :build_meta_tags, options
+        attr_accessor :meta_tags
+        helper_method :meta_tags
       end
-    end
 
-    protected
+      module ClassMethods
+        def build_meta_tags(options = {})
+          skip_before_action :build_default_meta_tags, options
+          before_action :build_meta_tags, options
+        end
+      end
 
-    def build_default_meta_tags
-      self.meta_tags = ::Metatags::BaseMetatags.new(nil, view_context)
+      protected
+
+      def build_default_meta_tags
+        self.meta_tags = ::Metatags::BaseMetatags.new(nil, view_context)
+      end
     end
   end
 end
