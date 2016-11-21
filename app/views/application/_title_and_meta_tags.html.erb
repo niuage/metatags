@@ -1,0 +1,14 @@
+<title><%= meta_tags.title %></title>
+<%= tag :meta, name: "description", content: meta_tags.description %>
+
+<%= tag :meta, name: "og:title", content: meta_tags.title %>
+<%= tag :meta, name: "og:type", content: meta_tags.type %>
+<%= tag :meta, name: "og:description", content: meta_tags.description %>
+<%= tag :meta, name: "og:url", content: meta_tags.url %>
+<%= tag :meta, name: "og:image", content: meta_tags.image %>
+
+<%= tag :meta, name: "twitter:card", content: meta_tags.twitter_card %>
+<%= tag :meta, name: "twitter:title", content: meta_tags.title %>
+<%= tag :meta, name: "twitter:description", content: meta_tags.description %>
+<%= tag :meta, name: "twitter:site", content: meta_tags.url %>
+<%= tag :meta, name: "twitter:image", content: meta_tags.image %>
