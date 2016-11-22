@@ -77,6 +77,9 @@ module Metatags
 
       protected
 
+      # Builds the meta_tags using either the class passed by the user with the `with`
+      # option or a class which name is inferred from the controller name.
+      #
       def build_default_meta_tags
         klass = metatags_class || default_metatags_class
         build_meta_tags(with: klass, instance: metatags_instance)
@@ -112,6 +115,19 @@ module Metatags
         end
       end
 
+      # This method is useful when the class name of the Metatags class cannot
+      # be inferred by the gem.
+      #
+      # Ex:
+      #
+      # class TeamsController
+      #   def show
+      #     if special_case?
+      #       build_meta_tags with: Metatags::SpecialMetatags, instance: :team
+      #     end
+      #   end
+      # end
+      #
       def build_meta_tags(with: Metatags::BaseMetatags, instance: nil)
         self.meta_tags = with.new(instance, view_context)
       end
