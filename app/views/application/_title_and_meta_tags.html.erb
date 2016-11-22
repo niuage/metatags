@@ -1,14 +1,32 @@
 <title><%= meta_tags.title %></title>
 <%= tag :meta, name: "description", content: meta_tags.description %>
 
+<%# OpenGraph %>
 <%= tag :meta, name: "og:title", content: meta_tags.title %>
 <%= tag :meta, name: "og:type", content: meta_tags.type %>
 <%= tag :meta, name: "og:description", content: meta_tags.description %>
 <%= tag :meta, name: "og:url", content: meta_tags.url %>
 <%= tag :meta, name: "og:image", content: meta_tags.image %>
 
+<%# Twitter %>
 <%= tag :meta, name: "twitter:card", content: meta_tags.twitter_card %>
 <%= tag :meta, name: "twitter:title", content: meta_tags.title %>
 <%= tag :meta, name: "twitter:description", content: meta_tags.description %>
-<%= tag :meta, name: "twitter:site", content: meta_tags.url %>
+<%= tag :meta, name: "twitter:url", content: meta_tags.twitter_url %>
+<%= tag :meta, name: "twitter:site", content: meta_tags.twitter_site %>
 <%= tag :meta, name: "twitter:image", content: meta_tags.image %>
+<%= tag :meta, name: "twitter:creator", content: meta_tags.twitter_creator %>
+
+<%# Google+ tags %>
+<%= tag :meta, itemprop: "name", content: meta_tags.title %>
+<%= tag :meta, itemprop: "description", content: meta_tags.description %>
+<%= tag :meta, itemprop: "image", content: meta_tags.image %>
+
+<%# Facebook %>
+<% if meta_tags.facebook_app_id %>
+  <%= tag :meta, name: "fb:app_id", content: meta_tags.facebook_app_id %>
+<% end %>
+
+<%# Others %>
+<%= tag :meta, name: "robots", content: meta_tags.robots %>
+<%= tag :meta, name: "theme-color", content: meta_tags.theme_color %>

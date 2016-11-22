@@ -17,6 +17,8 @@ module Metatags
   class BaseMetatags
     attr_accessor :object, :view_context
 
+    delegate :image_url, :request, to: :view_context
+
     def self.meta_tags_for(object, view_context)
       find_metatags_klass_for(object).new(object, view_context)
     end
@@ -35,8 +37,9 @@ module Metatags
     end
 
     def url
-      view_context.original_url
+      request.original_url
     end
+    alias_method :twitter_url, :url
 
     def image
       meta_tag_image_url("og-main.jpg")
@@ -54,12 +57,28 @@ module Metatags
       "summary_large_image"
     end
 
+    def twitter_site
+      "@devpost"
+    end
+
+    def twitter_creator
+    end
+
+    def facebook_app_id
+    end
+
+    def robots
+    end
+
+    def theme_color
+    end
+
     def i18n_scope
-      "meta_tags.base"
+      "meta_tags.#{object_class_name.underscore}"
     end
 
     def with_scope(data)
-      data.merge({ scope: i18n_scope })
+      (data || {}).merge({ scope: i18n_scope })
     end
 
     def i18n_title_data
@@ -71,13 +90,18 @@ module Metatags
     end
 
     def meta_tag_image_url(image_name)
-      view_context.image_url("meta_tags/#{image_name}")
+      image_url("meta_tags/#{image_name}")
     end
 
     def self.find_metatags_klass_for(object)
       return self if object.blank?
 
       "Metatags::#{object.class}Metatags".safe_constantize || Metatags::BaseMetatags
+    end
+
+    def object_class_name
+      return self.class.name.gsub(/Metatags(::)?/, "") if object.blank?
+      object.class.name.split("::").last
     end
   end
 end
