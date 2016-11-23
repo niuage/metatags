@@ -1,44 +1,36 @@
-#
-# Metatags::Concerns::Controller should be included in your ApplicationController.
-#
-# If the meta tags of a page don't rely on a particular model, then the default
-# meta tags are going to be build, nothing to do on your end.
-#
-# If your meta tags depend on a model, say an article, then we can't rely on the
-# before_action `build_default_meta_tags`, because it would be executed before the
-# before_action `find_article` from ArticlesController.
-# In this case, all you have to do is call `build_meta_tags` after
-# `before_action :find_article` in the ArticlesController, with the appropriate
-# options. See below:
-#
 # Example:
+#
+# class ApplicationController < ActionController::Base
+#   include Metatags::Concerns::Controller
+# end
 #
 # class ArticlesController < ApplicationController
 #   before_action :find_article, only: [:show]
 #
-#   build_meta_tags with: Metatags::ArticleMetatags, instance: :article
+#   # Simplest option.
+#   # Will use Metatags::ArticleMetatags by default.
+#   build_meta_tags instance: :article
+#   # OR
+#   # if you need to be specific about which class to use
+#   build_meta_tags with: Metatags::CustomArticleMetatags, instance: :article
+#   # OR
+#   # if you need logic to determine which Metatags class to use, and want to build
+#   # the meta tags in the action itself.
+#   skip_building_metatags only: [:index]
+#
+#   def index
+#     @articles = Article.all
+#   end
+#
+#   def show
+#   end
 #
 #   protected
 #
 #   def find_article
-#     @article = Article.friendly.find(params[:id])
+#     @article = Article.find(params[:id])
 #   end
 # end
-#
-# If you ommit the `with` option, then Metatags will try to infer the class
-# from the controller name.
-# So in the example above, `build_meta_tags instance: :article` would have worked
-# just as well.
-#
-#
-# module Metatags
-#   class ArticleMetatags < Metatags::BaseMetatags
-#      def url
-#         article_path(object, ref_medium: ...)
-#      end
-#   end
-# end
-#
 
 module Metatags
   module Concerns

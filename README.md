@@ -175,7 +175,7 @@ class SomeController
 end
 ```
 
-What if you need "complexe" logic to determine which class to use? Then you can skip the `before_action` building the default meta tags, then use `build_meta_tags` in the action itself.
+What if you need "complex" logic to determine which class to use? Then you can skip the `before_action` building the default meta tags, then use `build_meta_tags` in the action itself.
 
 ```
 class SomeController
