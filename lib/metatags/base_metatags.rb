@@ -5,12 +5,7 @@
 # This class, or one of its descendants, is instanciated on every page.
 #
 # If a new page requires different meta tags, create a new subclass, and override
-# the necessary methods. Then, instanciate this class in the relevant controller.
-# That's it.
-#
-# We use I18n as much as possible, so instead of overriding methods like title
-# and description in subsclasses, consider just overriding `#i18n_scope`, and
-# adding the title and desc values to `meta_tags.yml`.
+# the necessary methods.
 #
 
 module Metatags

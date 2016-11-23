@@ -1,8 +1,8 @@
 # Metatags
 
-## Goal
+## About
 
-Dealing with meta tags is a pain. Maybe Metatags can help?
+Dealing with meta tags is a pain. Hopefully Metatags can help.
 It leverages I18n and smart defaults to make it as easy as possible to output meta tags on each pages.
 
 ## Installation
@@ -19,7 +19,7 @@ And then execute:
 
 ##### Controllers
 Since one of the responsabilities of controllers is to prepare data for the views, our controllers are going to be the one building the meta tags.
-Start by including `include Metatags::Concerns::Controller` to your `ApplicationController`.
+Start by including the `Metatags::Concerns::Controller` module to your `ApplicationController`.
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -165,6 +165,32 @@ en:
         article/show:
             title: "%{article_title} | My app name"
             description: "%{article_description}"
+```
+
+What if you want to use the same Metatags' class in several controllers? Easy, use the `with` option.
+
+```
+class SomeController
+    build_meta_tags with: Metatags::GenericMetatags
+end
+```
+
+What if you need "complexe" logic to determine which class to use? Then you can skip the `before_action` building the default meta tags, then use `build_meta_tags` in the action itself.
+
+```
+class SomeController
+    skip_building_meta_tags only: [:index]
+    
+    def index
+        metatags_class = case
+        when current_user.vetted? then Metatags::VettedCandidateMetatags
+        when current_user.pending? then Metatags::PendingCandidateMetatags
+        when current_user.rejected? then Metatags::RejectedCandidateMetatags
+        end
+        
+        build_meta_tags with: metatags_class
+    end
+end
 ```
 
 That's the gist of it! If you have questions, read the source code, or ask on Github.

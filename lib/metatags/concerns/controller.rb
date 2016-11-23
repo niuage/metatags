@@ -73,6 +73,10 @@ module Metatags
           skip_before_action :build_default_meta_tags, options
           before_action :build_meta_tags_with_instance, options
         end
+
+        def skip_building_meta_tags(options = {})
+          skip_before_action :build_default_meta_tags, options
+        end
       end
 
       protected
