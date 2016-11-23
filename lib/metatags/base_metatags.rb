@@ -19,10 +19,6 @@ module Metatags
 
     delegate :image_url, :request, to: :view_context
 
-    def self.meta_tags_for(object, view_context)
-      find_metatags_klass_for(object).new(object, view_context)
-    end
-
     def initialize(object, view_context)
       self.object = object
       self.view_context = view_context
@@ -91,12 +87,6 @@ module Metatags
 
     def meta_tag_image_url(image_name)
       image_url("meta_tags/#{image_name}")
-    end
-
-    def self.find_metatags_klass_for(object)
-      return self if object.blank?
-
-      "Metatags::#{object.class}Metatags".safe_constantize || Metatags::BaseMetatags
     end
 
     def object_class_name

@@ -1,5 +1,5 @@
 module MetatagsHelper
-  def render_metatags
+  def render_meta_tags
     render meta_tags
   end
 end
