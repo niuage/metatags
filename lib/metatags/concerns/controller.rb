@@ -39,7 +39,7 @@ module Metatags
 
       included do
         class_attribute :metatags_class, :metatags_instance_sym
-        self.metatags_class = Metatags::BaseMetatags
+        initialize_metatags_class
 
         before_action :build_default_meta_tags
 
@@ -68,6 +68,10 @@ module Metatags
 
         def skip_building_meta_tags(options = {})
           skip_before_action :build_default_meta_tags, options
+        end
+
+        def initialize_metatags_class
+          self.metatags_class = "Metatags::AppMetatags".safe_constantize || Metatas::BaseMetatags
         end
       end
 
@@ -103,6 +107,8 @@ module Metatags
           "Metatags::#{inferred_name.split("::").last}Metatags::#{action_name.classify}",
           # Metatags::TeamMetatags
           "Metatags::#{inferred_name.split("::").last}Metatags",
+          # Metatags::BaseMetatags
+          "Metatags::AppMetatags"
           # Metatags::BaseMetatags
           "Metatags::BaseMetatags"
         ].detect do |class_name|
