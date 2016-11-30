@@ -48,6 +48,9 @@ module Metatags
       "summary_large_image"
     end
 
+    def twitter_image_alt
+    end
+
     def twitter_site
       "@devpost"
     end
