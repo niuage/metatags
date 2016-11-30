@@ -107,7 +107,7 @@ module Metatags
           "Metatags::#{inferred_name.split("::").last}Metatags::#{action_name.classify}",
           # Metatags::TeamMetatags
           "Metatags::#{inferred_name.split("::").last}Metatags",
-          # Metatags::BaseMetatags
+          # Metatags::AppMetatags
           "Metatags::AppMetatags",
           # Metatags::BaseMetatags
           "Metatags::BaseMetatags"

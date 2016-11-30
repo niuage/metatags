@@ -5,7 +5,7 @@ require "metatags/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "metatags"
+  s.name        = "Hakuna Metatags"
   s.version     = Metatags::VERSION
   s.authors     = ["niuage"]
   s.email       = ["niuage@gmail.com"]
