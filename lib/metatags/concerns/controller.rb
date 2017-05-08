@@ -71,7 +71,7 @@ module Metatags
         end
 
         def initialize_metatags_class
-          self.metatags_class = "Metatags::AppMetatags".safe_constantize || Metatas::BaseMetatags
+          self.metatags_class = "Metatags::AppMetatags".safe_constantize || Metatags::BaseMetatags
         end
       end
 
