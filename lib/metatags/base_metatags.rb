@@ -68,7 +68,7 @@ module Metatags
     end
 
     def i18n_scope
-      "meta_tags.#{object_class_name.underscore}"
+      "meta_tags.#{i18n_class_name.underscore}"
     end
 
     def with_scope(data)
@@ -87,9 +87,8 @@ module Metatags
       image_url("meta_tags/#{image_name}")
     end
 
-    def object_class_name
-      return self.class.name.gsub(/Metatags(::)?/, "") if object.blank?
-      object.class.name.split("::").last
+    def i18n_class_name
+      self.class.name.underscore.tr("/", ".").gsub(/_?metatags/, "")
     end
   end
 end
