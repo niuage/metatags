@@ -37,7 +37,7 @@ module Metatags
     end
 
     def type
-      "devpost:website"
+      "website"
     end
 
     def to_partial_path
